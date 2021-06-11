@@ -1,0 +1,1 @@
+# aspdotnet-k8s-learningdiary
