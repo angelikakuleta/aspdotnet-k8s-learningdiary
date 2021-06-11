@@ -1,14 +1,17 @@
 version: '3.4'
 
 services:
+  mongodb:
+    image: mongo
+
   learningdiary.api:
-    image: ${DOCKER_REGISTRY-}learningdiaryapi:0.1.0
+    image: ${DOCKER_REGISTRY-}learningdiaryapi
     build:
       context: .
       dockerfile: src/LearningDiary.API/Dockerfile
 
   learningdiary.webui:
-    image: ${DOCKER_REGISTRY-}learningdiarywebui:0.1.0
+    image: ${DOCKER_REGISTRY-}learningdiarywebui
     build:
       context: .
       dockerfile: src/LearningDiary.WebUI/Dockerfile
