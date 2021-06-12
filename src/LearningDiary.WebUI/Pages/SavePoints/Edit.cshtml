@@ -1,0 +1,64 @@
+﻿@page
+@model LearningDiary.WebUI.Pages.SavePoints.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>UpdateSavePointVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UpdateSavePointVM.Id" />
+            <div class="form-group">
+                <label asp-for="UpdateSavePointVM.Title" class="control-label"></label>
+                <input asp-for="UpdateSavePointVM.Title" class="form-control" />
+                <span asp-validation-for="UpdateSavePointVM.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdateSavePointVM.Description" class="control-label"></label>
+                <input asp-for="UpdateSavePointVM.Description" class="form-control" />
+                <span asp-validation-for="UpdateSavePointVM.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdateSavePointVM.Type" class="control-label"></label>
+                <select asp-for="UpdateSavePointVM.Type" asp-items="Html.GetEnumSelectList<SavePointType>()" class="form-control">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="UpdateSavePointVM.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdateSavePointVM.Link" class="control-label"></label>
+                <input asp-for="UpdateSavePointVM.Link" class="form-control" />
+                <span asp-validation-for="UpdateSavePointVM.Link" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdateSavePointVM.Status" class="control-label"></label>
+                <select asp-for="UpdateSavePointVM.Status" asp-items="Html.GetEnumSelectList<SavePointStatus>()" class="form-control">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="UpdateSavePointVM.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tags" class="control-label"></label>
+                <input asp-for="Tags" class="form-control" />
+                <span asp-validation-for="Tags" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

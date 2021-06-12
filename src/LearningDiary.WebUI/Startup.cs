@@ -1,13 +1,11 @@
+using LearningDiary.WebUI.Clients;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LearningDiary.WebUI
 {
@@ -23,6 +21,15 @@ namespace LearningDiary.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
+
+            services.AddHttpClient<ISavePointClient, SavePointClient>(client =>
+            {
+                client.BaseAddress = new Uri(Configuration["Clients:SavePoint"]);
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+
             services.AddRazorPages();
         }
 
@@ -40,10 +47,11 @@ namespace LearningDiary.WebUI
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

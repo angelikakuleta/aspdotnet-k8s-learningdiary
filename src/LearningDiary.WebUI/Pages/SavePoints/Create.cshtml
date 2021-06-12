@@ -1,0 +1,64 @@
+﻿@page
+@model LearningDiary.WebUI.Pages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>SavePointDetailsVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SavePointDetailsVM.Title" class="control-label"></label>
+                <input asp-for="SavePointDetailsVM.Title" class="form-control" />
+                <span asp-validation-for="SavePointDetailsVM.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SavePointDetailsVM.Description" class="control-label"></label>
+                <input asp-for="SavePointDetailsVM.Description" class="form-control" />
+                <span asp-validation-for="SavePointDetailsVM.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SavePointDetailsVM.Type" class="control-label"></label>
+                <select asp-for="SavePointDetailsVM.Type" asp-items="Html.GetEnumSelectList<SavePointType>()" class="form-control">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="SavePointDetailsVM.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SavePointDetailsVM.Link" class="control-label"></label>
+                <input asp-for="SavePointDetailsVM.Link" class="form-control" />
+                <span asp-validation-for="SavePointDetailsVM.Link" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SavePointDetailsVM.Status" class="control-label"></label>
+                <select asp-for="SavePointDetailsVM.Status" asp-items="Html.GetEnumSelectList<SavePointStatus>()" class="form-control">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="SavePointDetailsVM.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tags" class="control-label"></label>
+                <input asp-for="Tags" class="form-control" />
+                <span asp-validation-for="Tags" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="SavePointDetailsVM.Nickname" value="@User.Identity.Name"/>
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
