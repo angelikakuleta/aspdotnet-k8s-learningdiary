@@ -5,11 +5,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
+<h4>Details</h4>
+<hr />
 <div>
-    <h4>SavePointDetails</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.SavePointDetails.CreatedDate)
@@ -51,7 +49,7 @@
             @Html.DisplayNameFor(model => model.SavePointDetails.Tags)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SavePointDetails.Tags)
+            @string.Join(' ', Model.SavePointDetails.Tags)
         </dd>
     </dl>
 </div>

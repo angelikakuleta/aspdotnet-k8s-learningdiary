@@ -5,7 +5,7 @@ using LearningDiary.WebUI.Clients;
 using Microsoft.AspNetCore.Authorization;
 using LearningDiary.WebUI.ViewModels;
 
-namespace LearningDiary.WebUI.Pages
+namespace LearningDiary.WebUI.Pages.SavePoints
 {
     [Authorize]
     public class IndexModel : PageModel

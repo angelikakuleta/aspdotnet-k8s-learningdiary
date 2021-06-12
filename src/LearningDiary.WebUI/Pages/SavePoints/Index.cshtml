@@ -1,64 +1,48 @@
 ﻿@page
-@model LearningDiary.WebUI.Pages.IndexModel
+@model LearningDiary.WebUI.Pages.SavePoints.IndexModel
 
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>@User.Identity.Name</h1>
-
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SavePointList[0].CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SavePointList[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SavePointList[0].Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SavePointList[0].Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SavePointList[0].Tags)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.SavePointList) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @foreach (var tag in item.Tags)
-                {
-                    <span>
-                        @Html.DisplayFor(modelTag => tag)
-                    </span>
-                }
-            <td>
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div>
+    @foreach (var item in Model.SavePointList)
+    {
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.CreatedDate)</h6>
+                <p class="card-text">Type: @Html.DisplayFor(modelItem => item.Type)</p>
+                <p class="card-text">
+                    @{
+                        switch (@item.Status)
+                        {
+                            case "ReadyToStart":
+                                <span class="badge badge-danger">@Html.DisplayFor(modelItem => item.Status)</span>
+                                break;
+                            case "InProgress":
+                                <span class="badge badge-warning">@Html.DisplayFor(modelItem => item.Status)</span>
+                                break;
+                            default:
+                                <span class="badge badge-light">@Html.DisplayFor(modelItem => item.Status)</span>
+                                break;
+                        }
+                    }
+                </p>
+                <p class="card-text">
+                    @foreach (var tag in item.Tags)
+                    {
+                        <span class="badge badge-secondary">
+                            @Html.DisplayFor(modelTag => tag) 
+                        </span>
+                    }
+                </p>
+                <a class="card-link" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                <a class="card-link" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="card-link" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </div>
+        </div>
+    }
+</div>
